@@ -19,7 +19,7 @@ def tcp_link(sock, addr):
     print('Connected by', addr)
 
     pkg = utils.unpack_msg(sock.recv(1024).decode('utf-8'))
-    if pkg[0] != 1:
+    if pkg is None or len(pkg) == 0 or pkg[0] != 1:
         sock.close()
         return
 
@@ -28,10 +28,11 @@ def tcp_link(sock, addr):
 
     for i in range(n):
         pkg = utils.unpack_msg(sock.recv(1024).decode('utf-8'))
-        if pkg[0] != 3:
+        if pkg is None or len(pkg) == 0 or pkg[0] != 3:
             sock.close()
             return
         sock.send(utils.pack_response(pkg[1][::-1]).encode('utf-8'))
+
 
 if __name__ == '__main__':
     main()

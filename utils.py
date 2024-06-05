@@ -6,7 +6,7 @@ def pack_init(n):
 
 
 def unpack_init(msg):
-    return int(msg[2:2+config.N_LENGTH])
+    return int(msg[2:2 + config.N_LENGTH])
 
 
 def pack_agree():
@@ -46,4 +46,4 @@ def unpack_msg(msg):
     elif tp == 4:
         return 4, unpack_response(msg)
     else:
-        raise Exception("Unknown msg type")
+        return None
